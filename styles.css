@@ -190,19 +190,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: 26px;
   font-weight: 700;
   letter-spacing: -0.02em;
 }
 
 h2 {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-size: 28px;
   font-weight: 600;
   letter-spacing: -0.015em;
 }
 
 h3 {
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: 18px;
   font-weight: 500;
   letter-spacing: -0.01em;
 }
@@ -1265,7 +1265,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
 
 .home-hero-section h1 {
   font-family: 'Rubik', sans-serif;
-  font-size: 44px;
+  font-size: 26px;
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.15;
@@ -1459,7 +1459,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   }
 
   .home-hero-section h1 {
-    font-size: 52px;
+    font-size: 26px;
   }
 
   .home-hero-section p {
@@ -1487,7 +1487,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
 
 @media (min-width: 1024px) {
   .home-hero-section h1 {
-    font-size: 56px;
+    font-size: 26px;
   }
 
   .home-hero-section .capacity-snapshot {
@@ -1805,7 +1805,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
 
 .home-showcase-section .operational-tile h3 {
   font-family: 'Rubik', sans-serif;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   line-height: 1.25;
   color: var(--text-light);
@@ -1895,7 +1895,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   }
 
   .home-showcase-section h2 {
-    font-size: 38px;
+    font-size: 28px;
   }
 
   .home-showcase-section .intro-text {
@@ -1911,7 +1911,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   }
 
   .home-showcase-section .operational-tile h3 {
-    font-size: 22px;
+    font-size: 18px;
   }
 
   .home-showcase-section .operational-tile p {
@@ -1954,7 +1954,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
 
 .home-testimonials-section .testimonials-header h2 {
   font-family: 'Rubik', sans-serif;
-  font-size: 2.5rem;
+  font-size: 28px;
   font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1.2;
@@ -2007,7 +2007,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
 
 .home-testimonials-section .testimonial-card h3 {
   font-family: 'Rubik', sans-serif;
-  font-size: 1.25rem;
+  font-size: 18px;
   font-weight: 700;
   line-height: 1.25;
   color: var(--primary);
@@ -2091,7 +2091,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   }
 
   .home-testimonials-section .testimonials-header h2 {
-    font-size: 2rem;
+    font-size: 28px;
   }
 
   .home-testimonials-section .testimonials-grid {
@@ -2628,7 +2628,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
 
 .impact-mission-section .mission-narrative h2 {
   font-family: 'Rubik', sans-serif;
-  font-size: 2.5rem;
+  font-size: 28px;
   font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1.2;
@@ -2700,7 +2700,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
 
 .impact-mission-section .node-item h3 {
   font-family: 'Rubik', sans-serif;
-  font-size: 1.25rem;
+  font-size: 18px;
   font-weight: 700;
   line-height: 1.25;
   color: var(--text-light);
@@ -2728,7 +2728,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   }
 
   .impact-mission-section .mission-narrative h2 {
-    font-size: 2rem;
+    font-size: 28px;
   }
 
   .impact-mission-section .radar-container {
@@ -2748,7 +2748,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   }
 
   .impact-mission-section .node-item h3 {
-    font-size: 1.125rem;
+    font-size: 18px;
   }
 
   .impact-mission-section .node-item p {
@@ -2777,7 +2777,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
 
 .impact-timeline-section .timeline-header h2 {
   font-family: 'Rubik', sans-serif;
-  font-size: 2.5rem;
+  font-size: 28px;
   font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1.2;
@@ -2830,7 +2830,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
 
 .impact-timeline-section .step-content h3 {
   font-family: 'Rubik', sans-serif;
-  font-size: 1.5rem;
+  font-size: 18px;
   font-weight: 700;
   line-height: 1.25;
   color: var(--text-light);
@@ -2911,7 +2911,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
 
 .impact-timeline-section .artifacts-header h3 {
   font-family: 'Rubik', sans-serif;
-  font-size: 1.25rem;
+  font-size: 18px;
   font-weight: 700;
   color: var(--text-light);
   margin: 0;
@@ -2968,7 +2968,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   }
 
   .impact-timeline-section .timeline-header h2 {
-    font-size: 2rem;
+    font-size: 28px;
   }
 
   .impact-timeline-section .timeline-content {
@@ -2991,7 +2991,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   }
 
   .impact-timeline-section .step-content h3 {
-    font-size: 1.25rem;
+    font-size: 18px;
   }
 
   .impact-timeline-section .step-content p {
@@ -3011,7 +3011,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   }
 
   .impact-timeline-section .artifacts-header h3 {
-    font-size: 1.125rem;
+    font-size: 18px;
   }
 
   .impact-timeline-section .artifact-item {
@@ -3268,7 +3268,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
 
 .impact-cta-section h2 {
   font-family: 'Rubik', sans-serif;
-  font-size: 2.5rem;
+  font-size: 28px;
   font-weight: 700;
   color: var(--text-light);
   margin: 0 0 1rem 0;
@@ -3351,7 +3351,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   }
 
   .impact-cta-section h2 {
-    font-size: 1.75rem;
+    font-size: 28px;
   }
 
   .impact-cta-section p {
@@ -3574,7 +3574,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
 
 .destinations-portfolio-section .destinations-header h2 {
   font-family: 'Rubik', sans-serif;
-  font-size: 2.5rem;
+  font-size: 28px;
   font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1.2;
@@ -3656,7 +3656,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
 
 .destinations-portfolio-section .tile-content h3 {
   font-family: 'Rubik', sans-serif;
-  font-size: 1.5rem;
+  font-size: 18px;
   font-weight: 700;
   line-height: 1.25;
   color: var(--text-light);
@@ -3678,7 +3678,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   }
 
   .destinations-portfolio-section .destinations-header h2 {
-    font-size: 2rem;
+    font-size: 28px;
   }
 
   .destinations-portfolio-section .header-subtitle {
@@ -3699,7 +3699,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   }
 
   .destinations-portfolio-section .tile-content h3 {
-    font-size: 1.25rem;
+    font-size: 18px;
   }
 
   .destinations-portfolio-section .tile-content p {
@@ -4093,7 +4093,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
 }
 
 .contact-hero-section h1 {
-  font-size: 44px;
+  font-size: 26px;
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.15;
@@ -4205,7 +4205,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   }
 
   .contact-hero-section h1 {
-    font-size: 32px;
+    font-size: 26px;
     text-align: center;
   }
 
@@ -4527,7 +4527,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
 
 .contact-faq-section .faq-tile h3 {
   font-family: 'Rubik', sans-serif;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   line-height: 1.25;
   color: var(--text-light);
@@ -4627,7 +4627,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
 
 .contact-office-section .details-column h2 {
   font-family: 'Rubik', sans-serif;
-  font-size: 2.5rem;
+  font-size: 28px;
   font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1.2;
@@ -4677,7 +4677,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
 
 .contact-office-section .principles-tile h3 {
   font-family: 'Rubik', sans-serif;
-  font-size: 1.5rem;
+  font-size: 18px;
   font-weight: 700;
   line-height: 1.25;
   color: var(--text-light);
@@ -4711,7 +4711,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
 
 .contact-office-section .principle-content h4 {
   font-family: 'Rubik', sans-serif;
-  font-size: 1rem;
+  font-size: 27px;
   font-weight: 700;
   color: var(--text-light);
   margin-bottom: 6px;
@@ -4774,7 +4774,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   }
   
   .contact-office-section .details-column h2 {
-    font-size: 2rem;
+    font-size: 28px;
     margin-bottom: 24px;
   }
   
@@ -4787,7 +4787,7 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   }
   
   .contact-office-section .principles-tile h3 {
-    font-size: 1.25rem;
+    font-size: 18px;
     margin-bottom: 20px;
   }
   
@@ -5068,19 +5068,19 @@ img, picture, figure {
 
   /* 5. TYPOGRAPHY SCALING */
   h1 {
-    font-size: clamp(28px, 8vw, 48px) !important;
+    font-size: 26px;
   }
   
   h2 {
-    font-size: clamp(24px, 6vw, 36px) !important;
+    font-size: 28px;
   }
   
   h3 {
-    font-size: clamp(20px, 5vw, 28px) !important;
+    font-size: 18px;
   }
   
   h4 {
-    font-size: clamp(18px, 4vw, 24px) !important;
+    font-size: 27px;
   }
 
   p, li, span {
@@ -5236,7 +5236,7 @@ img, picture, figure {
 }
 
 .legal-page-content h1 {
-  font-size: 2.5rem;
+  font-size: 26px;
   margin-bottom: 1rem;
   color: inherit;
 }
@@ -5248,7 +5248,7 @@ img, picture, figure {
 }
 
 .legal-page-content h2 {
-  font-size: 1.5rem;
+  font-size: 28px;
   margin-top: 2rem;
   margin-bottom: 1rem;
   color: inherit;
@@ -5652,3 +5652,90 @@ body.accessibility-widget-visible ._access-menu {
 }
 
 /* ========== END RTL MOBILE NAVBAR FIX ========== */
+
+
+/* ========== GRID RESPONSIVE FIX (zappy-grid-mobile-fix) ========== */
+/* Ensures grids with explicit columns use CSS variable and are responsive on mobile */
+
+/* DESKTOP: Explicit column grids use CSS variable for grid-template-columns */
+/* This rule reads the --zappy-grid-cols CSS variable set in inline styles */
+[data-zappy-explicit-columns="true"] {
+  display: grid !important;
+  grid-template-columns: var(--zappy-grid-cols, repeat(2, minmax(0, 1fr))) !important;
+}
+
+@media (max-width: 768px) {
+  /* Auto-grid (AI-generated) grids - force single column on mobile */
+  .zappy-preserve-css-grid[data-zappy-auto-grid="true"],
+  [data-zappy-auto-grid="true"] {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  
+  /* Media-only grid items - constrain height on mobile */
+  .zappy-preserve-css-grid[data-zappy-auto-grid="true"] > .zappy-grid-item-media-only,
+  [data-zappy-auto-grid="true"] > .zappy-grid-item-media-only {
+    height: auto !important;
+    max-height: 300px !important;
+  }
+  
+  .zappy-preserve-css-grid[data-zappy-auto-grid="true"] > .zappy-grid-item-media-only img,
+  [data-zappy-auto-grid="true"] > .zappy-grid-item-media-only img {
+    height: auto !important;
+    max-height: 300px !important;
+  }
+  
+  /* MOBILE: Explicit column grids - force single column on mobile */
+  [data-zappy-explicit-columns="true"] {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Inline grid with fixed pixel columns - make responsive */
+  .zappy-inline-grid-active.zappy-preserve-css-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ========== HORIZONTAL-PAIR GRID MEDIA FIX ========== */
+/* Ensures media in horizontal-pair grids fills columns correctly */
+
+/* Media cells in horizontal-pair grids */
+.zappy-horizontal-grid[data-zappy-grid-kind="horizontal-pair"] [data-zappy-media-cell="true"] {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: stretch !important;
+  min-height: 0 !important;
+}
+
+/* Images/videos: preserve aspect ratio while filling column width */
+.zappy-horizontal-grid[data-zappy-grid-kind="horizontal-pair"] [data-zappy-media-cell="true"] > img,
+.zappy-horizontal-grid[data-zappy-grid-kind="horizontal-pair"] [data-zappy-media-cell="true"] > video {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  flex: 0 0 auto !important;
+  min-height: 0 !important;
+  display: block !important;
+  object-fit: contain !important;
+  object-position: center !important;
+}
+
+/* Icons/SVG: fill cell behavior */
+.zappy-horizontal-grid[data-zappy-grid-kind="horizontal-pair"] [data-zappy-media-cell="true"] > svg,
+.zappy-horizontal-grid[data-zappy-grid-kind="horizontal-pair"] [data-zappy-media-cell="true"] > .iconify,
+.zappy-horizontal-grid[data-zappy-grid-kind="horizontal-pair"] [data-zappy-media-cell="true"] > .iconify svg {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  display: block !important;
+}
+
+/* ========== END HORIZONTAL-PAIR GRID MEDIA FIX ========== */
+
+/* ========== END GRID RESPONSIVE FIX ========== */
