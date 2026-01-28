@@ -1,4 +1,6 @@
-# Business — Generative Engine Optimization Map
+# AERLUNO — Generative Engine Optimization Map
+
+> A תעופה ותיירות עם מימד חברתי business.
 
 ---
 
@@ -34,7 +36,19 @@ Information about WCAG compliance and accessibility features.
 
 # Business Context (for LLM understanding)
 
-## About Business
+## About AERLUNO
+AERLUNO is a business in the תעופה ותיירות עם מימד חברתי industry.
+
+## Target Audience
+- מטיילים מודעים חברתית
+- טסים תכופים עם מטרה
+- תיירים ידידותיים לסביבה
+- יזמים פילנתרופיים
+- נוודים דיגיטליים צעירים
+
+## Industry
+תעופה ותיירות עם מימד חברתי
+
 ---
 
 # Additional Resources
