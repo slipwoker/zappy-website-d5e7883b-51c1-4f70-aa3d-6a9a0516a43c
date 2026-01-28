@@ -1,43 +1,57 @@
-# Business — Generative Engine Optimization Map
+# AERLUNO — Generative Engine Optimization Map
+
+> A תעופה ותיירות עם מימד חברתי business.
 
 ---
 
 ## Pages
 
 ### Home
-https://example.com
+https://aerluno.zappy5.app
 
 ### Impact
-https://example.com/impact
+https://aerluno.zappy5.app/impact
 
 ### Destinations
-https://example.com/destinations
+https://aerluno.zappy5.app/destinations
 
 ### Contact
-https://example.com/contact
+https://aerluno.zappy5.app/contact
 
 ## Legal & Policy
 
 ### Privacy Policy
-https://example.com/privacy
+https://aerluno.zappy5.app/privacy
 Information about how user data is collected, stored, and protected.
 
 ### Terms & Conditions
-https://example.com/terms
+https://aerluno.zappy5.app/terms
 Legal terms describing service usage, rights, and policies.
 
 ### Accessibility Statement
-https://example.com/accessibility
+https://aerluno.zappy5.app/accessibility
 Information about WCAG compliance and accessibility features.
 
 ---
 
 # Business Context (for LLM understanding)
 
-## About Business
+## About AERLUNO
+AERLUNO is a business in the תעופה ותיירות עם מימד חברתי industry.
+
+## Target Audience
+- מטיילים מודעים חברתית
+- טסים תכופים עם מטרה
+- תיירים ידידותיים לסביבה
+- יזמים פילנתרופיים
+- נוודים דיגיטליים צעירים
+
+## Industry
+תעופה ותיירות עם מימד חברתי
+
 ---
 
 # Additional Resources
 
-- **Sitemap**: https://example.com/sitemap.xml
-- **Robots.txt**: https://example.com/robots.txt
+- **Sitemap**: https://aerluno.zappy5.app/sitemap.xml
+- **Robots.txt**: https://aerluno.zappy5.app/robots.txt
