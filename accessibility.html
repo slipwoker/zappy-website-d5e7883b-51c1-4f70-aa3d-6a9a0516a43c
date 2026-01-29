@@ -139,6 +139,428 @@
     <!-- Mickidum Accessibility Toolbar -->
     <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
 
+          <style id="zappy-cta-mobile-style">
+            /* Hide CTA list item on desktop (tablets and up) */
+            @media (min-width: 769px) {
+              .nav-cta-item-mobile {
+                display: none !important;
+              }
+            }
+            /* Show CTA list item on mobile */
+            @media (max-width: 768px) {
+              .nav-cta-item-mobile {
+                display: list-item !important;
+              }
+            }
+          </style>
+        
+          <style id="zappy-nested-menu-style">
+            /* Desktop only: vertically center nav items */
+            @media (min-width: 769px) {
+              .nav-menu,
+              #navMenu {
+                align-items: center !important;
+              }
+            }
+            
+            /* Menu Group styling (non-clickable parent) - TOP LEVEL ONLY with ultra-specific selector */
+            .nav-menu > li > .menu-group-title,
+            #navMenu > li > .menu-group-title {
+              display: inline-block !important;
+              padding: 0.5rem 1rem !important;
+              color: var(--nav-color) !important;
+              font-weight: 500 !important;
+              line-height: 1.7 !important;
+              cursor: default !important;
+              user-select: none !important;
+              vertical-align: middle !important;
+              text-decoration: none !important;
+              margin: 0 !important;
+              transition: color 0.3s ease !important;
+            }
+            
+            .nav-menu > li > .menu-group-title:hover,
+            #navMenu > li > .menu-group-title:hover {
+              color: var(--nav-hover-color) !important;
+            }
+            
+            /* Desktop: show submenu on Menu Group hover */
+            li:has(.menu-group-title):hover > .sub-menu {
+              opacity: 1 !important;
+              visibility: visible !important;
+              transform: translateY(0) !important;
+              pointer-events: auto !important; /* Enable interaction when hovering */
+            }
+            
+            /* Hide menu items marked as hidden (overrides hover states) */
+            .zappy-hidden-menu-item,
+            li:has(.menu-group-title):hover > .sub-menu .zappy-hidden-menu-item {
+              display: none !important;
+              opacity: 0 !important;
+              visibility: hidden !important;
+              pointer-events: none !important;
+            }
+            
+            /* Keep submenu visible when hovering over the submenu itself */
+            .sub-menu:hover {
+              opacity: 1 !important;
+              visibility: visible !important;
+              pointer-events: auto !important;
+            }
+            
+            /* Nested dropdown menu styles - using more specific selectors */
+            .nav-menu .sub-menu,
+            nav .sub-menu,
+            .navbar .sub-menu {
+              display: block !important; /* Ensure submenu is in the DOM */
+              position: absolute !important;
+              top: 100%;
+              left: 0;
+              right: auto;
+              min-width: 200px;
+              background: white;
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+              border-radius: 8px;
+              padding: 8px 0;
+              margin-top: 0px; /* Remove gap to prevent hover loss */
+              opacity: 0 !important;
+              visibility: hidden !important;
+              transform: translateY(-10px);
+              transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+              z-index: 1000;
+              list-style: none;
+              pointer-events: none; /* Prevent interaction when hidden */
+            }
+            
+            /* RTL (Hebrew/Arabic) submenu positioning - align to right instead of left */
+            [dir="rtl"] .nav-menu .sub-menu,
+            [dir="rtl"] nav .sub-menu,
+            [dir="rtl"] .navbar .sub-menu,
+            html[lang="he"] .nav-menu .sub-menu,
+            html[lang="he"] nav .sub-menu,
+            html[lang="he"] .navbar .sub-menu,
+            html[lang="ar"] .nav-menu .sub-menu,
+            html[lang="ar"] nav .sub-menu,
+            html[lang="ar"] .navbar .sub-menu {
+              left: auto;
+              right: 0;
+            }
+            
+            /* Show submenu on parent hover - more specific selectors */
+            .nav-menu li:hover > .sub-menu,
+            nav li:hover > .sub-menu,
+            .navbar li:hover > .sub-menu {
+              opacity: 1 !important;
+              visibility: visible !important;
+              transform: translateY(0) !important;
+              pointer-events: auto !important; /* Enable interaction when visible */
+            }
+            
+            /* Parent item must be relatively positioned */
+            .nav-menu li:has(.sub-menu),
+            nav li:has(.sub-menu),
+            .navbar li:has(.sub-menu) {
+              position: relative;
+            }
+            
+            /* Style for submenu items */
+            .sub-menu li {
+              list-style: none;
+              margin: 0;
+              padding: 0;
+            }
+            
+            .sub-menu a,
+            .sub-menu .menu-group-title {
+              display: block !important;
+              padding: 10px 12px !important;
+              color: #333 !important;
+              font-weight: 600 !important;
+              text-decoration: none;
+              transition: background-color 0.2s;
+              white-space: nowrap;
+              cursor: default;
+            }
+            
+            .sub-menu a:hover {
+              background-color: #f5f5f5;
+            }
+            
+            /* CRITICAL: Override submenu styles for TOP-LEVEL Menu Groups only - must come AFTER submenu styles */
+            .nav-menu > li > .menu-group-title,
+            #navMenu > li > .menu-group-title {
+              display: inline-block !important;
+              padding: 0.5rem 1rem !important;
+              color: var(--nav-color) !important;
+              font-weight: 500 !important;
+              line-height: 1.7 !important;
+              cursor: default !important;
+              user-select: none !important;
+              vertical-align: middle !important;
+              text-decoration: none !important;
+              margin: 0 !important;
+              transition: color 0.3s ease !important;
+            }
+            
+            .nav-menu > li > .menu-group-title:hover,
+            #navMenu > li > .menu-group-title:hover {
+              color: var(--nav-hover-color) !important;
+              background-color: transparent !important;
+            }
+            
+            /* On mobile, show nested menus as expandable accordion */
+            @media (max-width: 768px) {
+              /* Mobile submenu styling */
+              .nav-menu .sub-menu,
+              nav .sub-menu,
+              .navbar .sub-menu {
+                position: static !important;
+                transform: none !important;
+                box-shadow: none !important;
+                background: transparent !important;
+                margin-top: 0 !important;
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                visibility: hidden;
+                transition: max-height 0.3s ease, opacity 0.3s ease, visibility 0.3s ease, padding 0.3s ease;
+                padding: 0 !important;
+                border-radius: 0 !important;
+              }
+              
+              /* Expanded state */
+              .sub-menu.mobile-expanded {
+                max-height: 500px !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                padding: 8px 0 8px 16px !important;
+              }
+              
+              /* RTL padding adjustment */
+              [dir="rtl"] .sub-menu.mobile-expanded,
+              html[lang="he"] .sub-menu.mobile-expanded,
+              html[lang="ar"] .sub-menu.mobile-expanded {
+                padding: 8px 16px 8px 0 !important;
+              }
+              
+              /* Disable hover behavior on mobile */
+              .nav-menu li:hover > .sub-menu,
+              nav li:hover > .sub-menu,
+              .navbar li:hover > .sub-menu {
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+              }
+              
+              /* Enable visibility for expanded submenus */
+              .nav-menu li > .sub-menu.mobile-expanded,
+              nav li > .sub-menu.mobile-expanded,
+              .navbar li > .sub-menu.mobile-expanded {
+                opacity: 1 !important;
+                visibility: visible !important;
+                pointer-events: auto !important;
+              }
+              
+              .sub-menu a {
+                padding: 10px 0 !important;
+                display: block !important;
+                font-size: 14px !important;
+              }
+              
+              .sub-menu a:hover {
+                background-color: transparent !important;
+              }
+              
+              /* Parent item wrapper - flex layout for link + toggle */
+              .nav-menu li:has(.sub-menu),
+              nav li:has(.sub-menu),
+              .navbar li:has(.sub-menu) {
+                display: flex !important;
+                flex-wrap: wrap !important;
+                align-items: center !important;
+              }
+              
+              /* Parent link - takes most space, allows navigation */
+              .nav-menu li:has(.sub-menu) > a,
+              nav li:has(.sub-menu) > a,
+              .navbar li:has(.sub-menu) > a,
+              .nav-menu > li > .menu-group-title,
+              #navMenu > li > .menu-group-title {
+                flex: 1 !important;
+              }
+              
+              /* HIDE EXISTING CHEVRONS/ARROWS from cloned sites to prevent duplicates */
+              .nav-menu li:has(.sub-menu) > a .fa-chevron-down,
+              .nav-menu li:has(.sub-menu) > a .fa-angle-down,
+              .nav-menu li:has(.sub-menu) > a [class*="chevron"],
+              .nav-menu li:has(.sub-menu) > a [class*="arrow"],
+              nav li:has(.sub-menu) > a [class*="chevron"],
+              nav li:has(.sub-menu) > a [class*="arrow"],
+              #navMenu li:has(.sub-menu) > a [class*="chevron"],
+              #navMenu li:has(.sub-menu) > a [class*="arrow"] {
+                display: none !important;
+                visibility: hidden !important;
+              }
+              
+              /* Toggle arrow button - separate clickable area */
+              .mobile-submenu-toggle {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                width: 44px !important;
+                height: 44px !important;
+                background: transparent !important;
+                border: none !important;
+                cursor: pointer !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                flex-shrink: 0 !important;
+                -webkit-tap-highlight-color: transparent;
+              }
+              
+              .mobile-submenu-toggle::after {
+                content: '' !important;
+                display: block !important;
+                width: 0 !important;
+                height: 0 !important;
+                border-left: 6px solid transparent !important;
+                border-right: 6px solid transparent !important;
+                border-top: 7px solid currentColor !important;
+                transition: transform 0.3s ease !important;
+              }
+              
+              /* Rotate arrow when expanded */
+              .mobile-submenu-toggle.expanded::after {
+                transform: rotate(180deg) !important;
+              }
+              
+              /* Submenu takes full width below parent */
+              .nav-menu li:has(.sub-menu) > .sub-menu,
+              nav li:has(.sub-menu) > .sub-menu,
+              .navbar li:has(.sub-menu) > .sub-menu {
+                flex-basis: 100% !important;
+                width: 100% !important;
+              }
+            }
+            
+            /* Hide toggle button on desktop */
+            @media (min-width: 769px) {
+              .mobile-submenu-toggle {
+                display: none !important;
+              }
+            }
+          </style>
+          
+          <script id="zappy-mobile-menu-script">
+            // Mobile menu toggle for nested submenus (including Menu Groups)
+            // Uses separate toggle button - link navigates, arrow toggles submenu
+            (function() {
+              function initMobileMenuToggles() {
+                // Only run on mobile
+                if (window.innerWidth > 768) {
+                  // Remove any toggle buttons on desktop
+                  document.querySelectorAll('.mobile-submenu-toggle').forEach(btn => btn.remove());
+                  document.querySelectorAll('.sub-menu.mobile-expanded').forEach(menu => {
+                    menu.classList.remove('mobile-expanded');
+                  });
+                  console.log('[MOBILE MENU] Desktop mode - cleanup done');
+                  return;
+                }
+                
+                console.log('[MOBILE MENU] Initializing mobile menu toggles...');
+                
+                // Find all parent menu items (items with .sub-menu)
+                const menuItemsWithSubmenus = document.querySelectorAll(
+                  '.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)'
+                );
+                
+                console.log('[MOBILE MENU] Found', menuItemsWithSubmenus.length, 'items with submenus');
+                
+                menuItemsWithSubmenus.forEach(function(li) {
+                  // Skip if already has toggle button
+                  if (li.querySelector('.mobile-submenu-toggle')) {
+                    return;
+                  }
+                  
+                  const submenu = li.querySelector('.sub-menu');
+                  const parentLink = li.querySelector(':scope > a') || li.querySelector(':scope > .menu-group-title');
+                  
+                  if (!submenu || !parentLink) return;
+                  
+                  // Create toggle button
+                  const toggleBtn = document.createElement('button');
+                  toggleBtn.className = 'mobile-submenu-toggle';
+                  toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+                  toggleBtn.setAttribute('type', 'button');
+                  
+                  // Insert toggle button after the link
+                  parentLink.insertAdjacentElement('afterend', toggleBtn);
+                  
+                  console.log('[MOBILE MENU] Created toggle button for:', parentLink.textContent?.trim());
+                  
+                  // Handle toggle button click - only toggles submenu
+                  toggleBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const isExpanded = submenu.classList.contains('mobile-expanded');
+                    
+                    // Close all other submenus first
+                    document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+                      if (menu !== submenu) {
+                        menu.classList.remove('mobile-expanded');
+                        const otherToggle = menu.parentElement.querySelector('.mobile-submenu-toggle');
+                        if (otherToggle) otherToggle.classList.remove('expanded');
+                      }
+                    });
+                    
+                    // Toggle this submenu
+                    submenu.classList.toggle('mobile-expanded');
+                    toggleBtn.classList.toggle('expanded');
+                    
+                    console.log('[MOBILE MENU] Toggled submenu:', !isExpanded ? 'expanded' : 'collapsed');
+                  });
+                  
+                  // Parent link navigates normally - no preventDefault
+                });
+              }
+              
+              // Initialize on DOM load
+              if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initMobileMenuToggles);
+              } else {
+                initMobileMenuToggles();
+              }
+              
+              // Re-initialize on window resize (but use debounce to avoid too many calls)
+              let resizeTimer;
+              window.addEventListener('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(initMobileMenuToggles, 250);
+              });
+              
+              // Also initialize when mobile menu becomes visible
+              // This handles cases where the mobile menu is hidden initially
+              const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                  if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    const target = mutation.target;
+                    if (target.classList.contains('active') || target.style.display !== 'none') {
+                      console.log('[MOBILE MENU] Mobile menu became visible, re-initializing...');
+                      setTimeout(initMobileMenuToggles, 100);
+                    }
+                  }
+                });
+              });
+              
+              // Observe mobile menu containers
+              const mobileMenus = document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu');
+              mobileMenus.forEach(function(menu) {
+                observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+              });
+            })();
+          </script>
+        
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
@@ -349,98 +771,56 @@
 })();
 </script>
 <!-- End Zappy Analytics -->
-
-    <style id="zappy-dropdown-submenu-styles">
-      /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
-      /* Base styles for dropdown submenus - parent must be positioned */
-      .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
-      /* Submenu base - hidden by default */
-      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
-      /* CRITICAL: Desktop hover styles to show dropdown */
-      .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
-      /* Submenu item styling */
-      .sub-menu li { list-style: none; margin: 0; padding: 0; }
-      .sub-menu a { display: block !important; padding: 10px 16px !important; color: #333 !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
-      .sub-menu a:hover { background-color: #f5f5f5; }
-      /* RTL (Hebrew/Arabic) dropdown positioning */
-      [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
-      /* Hide empty dropdown menus */
-      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))), .sub-menu:not(:has(li)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
-      /* Desktop: show submenu on Menu Group hover */
-      li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
-      /* Menu Group title styling */
-      .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block; padding: 0.5rem 1rem; cursor: default; user-select: none; }
-      
-      /* ========== MOBILE SUBMENU STYLES ========== */
-      @media (max-width: 768px) {
-        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
-        .sub-menu.mobile-expanded { max-height: 500px !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
-        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
-        /* Disable hover behavior on mobile */
-        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
-        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
-        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; }
-        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; }
-        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
-        .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: 44px !important; background: transparent !important; border: none !important; cursor: pointer !important; }
-        .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
-        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
-        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
-        .sub-menu a { padding: 10px 0 !important; display: block !important; }
-        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; }
-      }
-      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
-    </style>
 </head>
 <body>
-    <nav class="navbar" dir="rtl"><button class="mobile-toggle" id="mobileToggle" aria-label="תפריט"><svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg><svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display: none;"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></button><button class="phone-header-btn" aria-label="התקשר"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></button><div class="nav-container"><div class="nav-right-group"><div class="nav-brand"><a href="/" class="logo-link"><img src="/assets/business-logo.webp" alt="AERLUNO" class="logo"></a></div><ul class="nav-menu" id="navMenu"><li><a href="/impact">השפעה</a></li><li><a href="/destinations">יעדים</a></li></ul></div><div class="nav-cta-container"><a href="/contact" class="nav-cta-btn">צור קשר</a></div></div></nav>
+    <nav class="navbar" dir="rtl"><button class="mobile-toggle" id="mobileToggle" aria-label="תפרחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ט"><svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg><svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display: none;"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></button><button class="phone-header-btn" aria-label="התקשר"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></button><div class="nav-container"><div class="nav-right-group"><div class="nav-brand"><a href="/" class="logo-link"><img src="/assets/business-logo.webp" alt="AERLUNO" class="logo"></a></div><ul class="nav-menu" id="navMenu"><li><a href="/destinations">חיבור בין אחריות חברתית להשפעה אמיתית,במודל מדיד ,ובר־קיימא.עדחיבור בין אחריות חברתית להשפעה אמיתית,במודל מדיד ,ובר־קיימא.ם</a></li><li><a href="/impact">השפעה</a></li><li class="nav-cta-item-mobile"><a href="/contact">צור קשר</a></li></ul></div><div class="nav-cta-container"><a href="/contact" class="nav-cta-btn">צור קשר</a></div></div></nav>
     <main>
     <div class="legal-page-wrapper"><div class="legal-container">
-        <h1 style="font-size: 26px;">הצהרת נגישות</h1>
+        <h1 style="font-size: 25px;">הצהרת נגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שות</h1>
         
         <div class="last-updated">
             <strong>עדכון אחרון:</strong> 28.1.2026
         </div>
 
         <p>
-            AERLUNO מחויבת להנגיש את השירותים לכלל הציבור. אנו פועלים ליישם את הנחיות התקן הישראלי 
-            (ת"י 5568) המבוסס על הנחיות WCAG 2.1 ברמת AA.
+            AERLUNO מחוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.בת להנגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ש את השחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.רותחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם לכלל הצחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.בור. אנו פועלחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם לחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שם את הנחחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות התקן החיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שראלחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. 
+            (ת"חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. 5568) המבוסס על הנחחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות WCAG 2.1 ברמת AA.
         </p>
 
         <div class="compliance-level">
-            רמת נגישות: AA (תקן ישראלי ת"י 5568)
+            רמת נגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שות: AA (תקן חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שראלחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. ת"חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. 5568)
         </div>
 
-        <h2 style="font-size: 28px;">1. מדיניות הנגישות</h2>
+        <h2 style="font-size: 28px;">1. מדחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.נחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות הנגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שות</h2>
         <p>
-            אנו מאמינים בשוויון זכויות ובזכותו של כל אדם לקבל מידע ושירותים בצורה עצמאית ושוויונית. 
-            אתר זה תוכנן ונבנה תוך מתן דגש מיוחד על נגישות לאנשים עם מוגבלויות.
+            אנו מאמחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.נחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם בשווחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ון זכוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות ובזכותו של כל אדם לקבל מחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.דע ושחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.רותחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם בצורה עצמאחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת ושווחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ונחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת. 
+            אתר זה תוכנן ונבנה תוך מתן דגש מחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.וחד על נגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שות לאנשחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם עם מוגבלוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות.
         </p>
 
-        <h2 style="font-size: 28px;">2. הסדרי הנגישות באתר</h2>
+        <h2 style="font-size: 28px;">2. הסדרחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. הנגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שות באתר</h2>
         <ul>
-            <li>תמיכה בניווט באמצעות מקלדת</li>
-            <li>תמיכה בקוראי מסך</li>
-            <li>ניגודיות צבעים מתאימה</li>
-            <li>גדלי פונט גמישים וניתנים להגדלה</li>
-            <li>תיאורי תמונות (Alt text) מפורטים</li>
-            <li>כותרות מובנות היררכית</li>
-            <li>קישורים תיאוריים וברורים</li>
-            <li>תמיכה בזום עד 200% ללא אובדן תוכן</li>
+            <li>תמחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.כה בנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ווט באמצעות מקלדת</li>
+            <li>תמחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.כה בקוראחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. מסך</li>
+            <li>נחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.גודחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות צבעחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם מתאחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.מה</li>
+            <li>גדלחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. פונט גמחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם ונחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.תנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם להגדלה</li>
+            <li>תחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.אורחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. תמונות (Alt text) מפורטחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם</li>
+            <li>כותרות מובנות החיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ררכחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת</li>
+            <li>קחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שורחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם תחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.אורחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם וברורחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם</li>
+            <li>תמחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.כה בזום עד 200% ללא אובדן תוכן</li>
         </ul>
 
         <div class="wcag-info">
-            <h3 style="font-size: 18px;">תאימות לתקן WCAG 2.1</h3>
+            <h3 style="font-size: 18px;">תאחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.מות לתקן WCAG 2.1</h3>
             <p>האתר תואם לרמת AA של תקן WCAG 2.1, הכולל:</p>
             <ul>
-                <li><strong>נתפס (Perceivable):</strong> המידע מוצג בדרכים שמשתמשים יכולים לתפוס</li>
-                <li><strong>פעיל (Operable):</strong> רכיבי הממשק ניתנים להפעלה</li>
-                <li><strong>מובן (Understandable):</strong> המידע וממשק המשתמש מובנים</li>
-                <li><strong>חזק (Robust):</strong> התוכן יכול להיות מפוענח על ידי מגוון טכנולוגיות</li>
+                <li><strong>נתפס (Perceivable):</strong> המחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.דע מוצג בדרכחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם שמשתמשחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.כולחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם לתפוס</li>
+                <li><strong>פעחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ל (Operable):</strong> רכחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.בחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. הממשק נחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.תנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם להפעלה</li>
+                <li><strong>מובן (Understandable):</strong> המחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.דע וממשק המשתמש מובנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם</li>
+                <li><strong>חזק (Robust):</strong> התוכן חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.כול להחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות מפוענח על חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.דחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. מגוון טכנולוגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות</li>
             </ul>
         </div>
 
-        <h2 style="font-size: 28px;">3. טכנולוגיות מסייעות נתמכות</h2>
+        <h2 style="font-size: 28px;">3. טכנולוגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות מסחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.עות נתמכות</h2>
         <ul>
             <li>NVDA (Windows)</li>
             <li>JAWS (Windows)</li>
@@ -450,34 +830,34 @@
             <li>Switch navigation</li>
         </ul>
 
-        <h2 style="font-size: 28px;">4. בדיקות נגישות</h2>
+        <h2 style="font-size: 28px;">4. בדחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.קות נגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שות</h2>
         <p>האתר נבדק באמצעות:</p>
         <ul>
-            <li>כלים אוטומטיים לבדיקת נגישות</li>
-            <li>בדיקות ידניות עם קוראי מסך</li>
-            <li>ניווט באמצעות מקלדת בלבד</li>
-            <li>בדיקת ניגודיות צבעים</li>
-            <li>בדיקה עם משתמשים עם מוגבלויות</li>
+            <li>כלחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם אוטומטחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם לבדחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.קת נגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שות</li>
+            <li>בדחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.קות חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.דנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות עם קוראחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. מסך</li>
+            <li>נחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ווט באמצעות מקלדת בלבד</li>
+            <li>בדחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.קת נחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.גודחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות צבעחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם</li>
+            <li>בדחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.קה עם משתמשחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם עם מוגבלוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות</li>
         </ul>
 
-        <h2 style="font-size: 28px;">5. שיפורים מתמשכים</h2>
+        <h2 style="font-size: 28px;">5. שחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.פורחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם מתמשכחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם</h2>
         <p>
-            אנו עובדים באופן מתמשך לשיפור נגישות האתר ומעדכנים אותו בהתאם להתפתחויות טכנולוגיות ולמשוב מהמשתמשים.
+            אנו עובדחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם באופן מתמשך לשחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.פור נגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שות האתר ומעדכנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם אותו בהתאם להתפתחוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות טכנולוגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות ולמשוב מהמשתמשחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם.
         </p>
 
         <div class="contact-info">
-            <h2 style="font-size: 28px;">6. יצירת קשר ומשוב</h2>
-            <p>אם נתקלתם בבעיית נגישות באתר או זקוקים לסיוע, אנא פנו אלינו:</p>
+            <h2 style="font-size: 28px;">6. חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.צחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.רת קשר ומשוב</h2>
+            <p>אם נתקלתם בבעחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת נגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שות באתר או זקוקחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם לסחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.וע, אנא פנו אלחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.נו:</p>
             <ul>
                 <li><strong>חברה:</strong> AERLUNO</li>
-                <li><strong>אימייל:</strong> <a href="mailto:info@company.com">info@company.com</a></li>
-                <li><strong>טלפון:</strong> <a href="tel:03-1234567">03-1234567</a></li>
+                <li><strong>אחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.מחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ל:</strong> <a href="mailto:info@company.com">info@company.com</a></li>
+                <li><strong>טלפון:</strong> <a href="tel:0547597599">0547597599</a></li>
             </ul>
             <p>
-                <strong>זמני מענה:</strong> נענה לפניות בנושא נגישות תוך 3 ימי עסקים ונפעל לפתרון תוך 10 ימי עסקים.
+                <strong>זמנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. מענה:</strong> נענה לפנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות בנושא נגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שות תוך 3 חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.מחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. עסקחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם ונפעל לפתרון תוך 10 חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.מחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. עסקחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם.
             </p>
             <p>
-                <strong>תלונות:</strong> ניתן להגיש תלונה למשרד המשפטים - הנציבות לשוויון זכויות לאנשים עם מוגבלות
+                <strong>תלונות:</strong> נחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.תן להגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ש תלונה למשרד המשפטחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם - הנצחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.בות לשווחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ון זכוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות לאנשחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם עם מוגבלות
             </p>
         </div>
 
@@ -489,14 +869,14 @@
     <div class="footer-grid">
       <div class="footer-column footer-about">
         <img src="/assets/business-logo.webp" alt="AERLUNO" class="logo">
-        <p class="footer-tagline">תעופה ותיירות עם מימד חברתי - מחברים בין עולמות ומשנים חיים</p>
+        <p class="footer-tagline">תעופה ותחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.רות עם מחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.מד חברתחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. - מחברחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם בחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ן עולמות ומשנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם חחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם</p>
       </div>
       
       <div class="footer-column footer-links">
-        <h3 class="footer-title" style="font-size: 18px;">קישורים מהירים</h3>
+        <h3 class="footer-title" style="font-size: 18px;">קחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שורחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם מהחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.רחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם</h3>
         <ul class="footer-menu">
-          <li><a href="/impact">השפעה חברתית</a></li>
-          <li><a href="/destinations">יעדים</a></li>
+          <li><a href="/impact">השפעה חברתחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת</a></li>
+          <li><a href="/destinations">חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.עדחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם</a></li>
           <li><a href="/contact">צור קשר</a></li>
         </ul>
       </div>
@@ -506,19 +886,19 @@
         <ul class="contact-list">
           <li>
             <i class="fas fa-envelope"></i>
-            <a href="mailto:[business_email]">[business_email]</a>
+            <a href="mailto:info@company.com">info@company.com</a>
           </li>
           <li>
             <i class="fas fa-phone"></i>
-            <a href="tel:[business_phone]">[business_phone]</a>
+            <a href="tel:0547597599">0547597599</a>
           </li>
           <li><a href="/impact"><i class="fas fa-map-marker-alt"></i>
-            <span>[business_address]</span></a></li>
+            <span>TEL AVIV, חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שראל</span></a></li>
         </ul>
       </div>
       
       <div class="footer-column footer-social">
-        <h3 class="footer-title" style="font-size: 18px;">עקבו אחרינו</h3>
+        <h3 class="footer-title" style="font-size: 18px;">עקבו אחרחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.נו</h3>
         <div class="social-links">
           <a href="[facebook_handle]" aria-label="Facebook" target="_blank" rel="noopener">
             <i class="fab fa-facebook-f"></i>
@@ -526,7 +906,7 @@
           <a href="[instagram_handle]" aria-label="Instagram" target="_blank" rel="noopener">
             <i class="fab fa-instagram"></i>
           </a>
-          <a href="[whatsapp_handle]" aria-label="WhatsApp" target="_blank" rel="noopener">
+          <a href="https://wa.me/972547597599" aria-label="WhatsApp" target="_blank" rel="noopener">
             <i class="fab fa-whatsapp"></i>
           </a>
         </div>
@@ -535,14 +915,14 @@
     
     <div class="footer-bottom">
       <div class="footer-legal">
-        <a href="/privacy">מדיניות פרטיות</a>
+        <a href="/privacy">מדחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.נחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות פרטחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות</a>
         <span class="separator">|</span>
-        <a href="/terms">תנאים והגבלות</a>
+        <a href="/terms">תנאחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם והגבלות</a>
         <span class="separator">|</span>
-        <a href="/accessibility">הצהרת נגישות</a>
+        <a href="/accessibility">הצהרת נגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שות</a>
       </div>
       <div class="footer-copyright">
-        <p>© 2026 AERLUNO. כל הזכויות שמורות.</p>
+        <p>© 2026 AERLUNO. כל הזכוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות שמורות.</p>
       </div>
       <div class="footer-attribution">
         <a href="https://zappy5.com" target="_blank" class="zappy-attribution" rel="noopener">Generated by Zappy</a>

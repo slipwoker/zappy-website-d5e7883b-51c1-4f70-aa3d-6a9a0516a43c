@@ -78,55 +78,435 @@
     <!-- Mickidum Accessibility Toolbar -->
     <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
 
-    <style id="zappy-dropdown-submenu-styles">
-      /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
-      /* Base styles for dropdown submenus - parent must be positioned */
-      .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
-      /* Submenu base - hidden by default */
-      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
-      /* CRITICAL: Desktop hover styles to show dropdown */
-      .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
-      /* Submenu item styling */
-      .sub-menu li { list-style: none; margin: 0; padding: 0; }
-      .sub-menu a { display: block !important; padding: 10px 16px !important; color: #333 !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
-      .sub-menu a:hover { background-color: #f5f5f5; }
-      /* RTL (Hebrew/Arabic) dropdown positioning */
-      [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
-      /* Hide empty dropdown menus */
-      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))), .sub-menu:not(:has(li)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
-      /* Desktop: show submenu on Menu Group hover */
-      li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
-      /* Menu Group title styling */
-      .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block; padding: 0.5rem 1rem; cursor: default; user-select: none; }
-      
-      /* ========== MOBILE SUBMENU STYLES ========== */
-      @media (max-width: 768px) {
-        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
-        .sub-menu.mobile-expanded { max-height: 500px !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
-        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
-        /* Disable hover behavior on mobile */
-        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
-        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
-        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; }
-        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; }
-        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
-        .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: 44px !important; background: transparent !important; border: none !important; cursor: pointer !important; }
-        .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
-        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
-        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
-        .sub-menu a { padding: 10px 0 !important; display: block !important; }
-        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; }
-      }
-      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
-    </style>
-</head>
+          <style id="zappy-cta-mobile-style">
+            /* Hide CTA list item on desktop (tablets and up) */
+            @media (min-width: 769px) {
+              .nav-cta-item-mobile {
+                display: none !important;
+              }
+            }
+            /* Show CTA list item on mobile */
+            @media (max-width: 768px) {
+              .nav-cta-item-mobile {
+                display: list-item !important;
+              }
+            }
+          </style>
+        
+          <style id="zappy-nested-menu-style">
+            /* Desktop only: vertically center nav items */
+            @media (min-width: 769px) {
+              .nav-menu,
+              #navMenu {
+                align-items: center !important;
+              }
+            }
+            
+            /* Menu Group styling (non-clickable parent) - TOP LEVEL ONLY with ultra-specific selector */
+            .nav-menu > li > .menu-group-title,
+            #navMenu > li > .menu-group-title {
+              display: inline-block !important;
+              padding: 0.5rem 1rem !important;
+              color: var(--nav-color) !important;
+              font-weight: 500 !important;
+              line-height: 1.7 !important;
+              cursor: default !important;
+              user-select: none !important;
+              vertical-align: middle !important;
+              text-decoration: none !important;
+              margin: 0 !important;
+              transition: color 0.3s ease !important;
+            }
+            
+            .nav-menu > li > .menu-group-title:hover,
+            #navMenu > li > .menu-group-title:hover {
+              color: var(--nav-hover-color) !important;
+            }
+            
+            /* Desktop: show submenu on Menu Group hover */
+            li:has(.menu-group-title):hover > .sub-menu {
+              opacity: 1 !important;
+              visibility: visible !important;
+              transform: translateY(0) !important;
+              pointer-events: auto !important; /* Enable interaction when hovering */
+            }
+            
+            /* Hide menu items marked as hidden (overrides hover states) */
+            .zappy-hidden-menu-item,
+            li:has(.menu-group-title):hover > .sub-menu .zappy-hidden-menu-item {
+              display: none !important;
+              opacity: 0 !important;
+              visibility: hidden !important;
+              pointer-events: none !important;
+            }
+            
+            /* Keep submenu visible when hovering over the submenu itself */
+            .sub-menu:hover {
+              opacity: 1 !important;
+              visibility: visible !important;
+              pointer-events: auto !important;
+            }
+            
+            /* Nested dropdown menu styles - using more specific selectors */
+            .nav-menu .sub-menu,
+            nav .sub-menu,
+            .navbar .sub-menu {
+              display: block !important; /* Ensure submenu is in the DOM */
+              position: absolute !important;
+              top: 100%;
+              left: 0;
+              right: auto;
+              min-width: 200px;
+              background: white;
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+              border-radius: 8px;
+              padding: 8px 0;
+              margin-top: 0px; /* Remove gap to prevent hover loss */
+              opacity: 0 !important;
+              visibility: hidden !important;
+              transform: translateY(-10px);
+              transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+              z-index: 1000;
+              list-style: none;
+              pointer-events: none; /* Prevent interaction when hidden */
+            }
+            
+            /* RTL (Hebrew/Arabic) submenu positioning - align to right instead of left */
+            [dir="rtl"] .nav-menu .sub-menu,
+            [dir="rtl"] nav .sub-menu,
+            [dir="rtl"] .navbar .sub-menu,
+            html[lang="he"] .nav-menu .sub-menu,
+            html[lang="he"] nav .sub-menu,
+            html[lang="he"] .navbar .sub-menu,
+            html[lang="ar"] .nav-menu .sub-menu,
+            html[lang="ar"] nav .sub-menu,
+            html[lang="ar"] .navbar .sub-menu {
+              left: auto;
+              right: 0;
+            }
+            
+            /* Show submenu on parent hover - more specific selectors */
+            .nav-menu li:hover > .sub-menu,
+            nav li:hover > .sub-menu,
+            .navbar li:hover > .sub-menu {
+              opacity: 1 !important;
+              visibility: visible !important;
+              transform: translateY(0) !important;
+              pointer-events: auto !important; /* Enable interaction when visible */
+            }
+            
+            /* Parent item must be relatively positioned */
+            .nav-menu li:has(.sub-menu),
+            nav li:has(.sub-menu),
+            .navbar li:has(.sub-menu) {
+              position: relative;
+            }
+            
+            /* Style for submenu items */
+            .sub-menu li {
+              list-style: none;
+              margin: 0;
+              padding: 0;
+            }
+            
+            .sub-menu a,
+            .sub-menu .menu-group-title {
+              display: block !important;
+              padding: 10px 12px !important;
+              color: #333 !important;
+              font-weight: 600 !important;
+              text-decoration: none;
+              transition: background-color 0.2s;
+              white-space: nowrap;
+              cursor: default;
+            }
+            
+            .sub-menu a:hover {
+              background-color: #f5f5f5;
+            }
+            
+            /* CRITICAL: Override submenu styles for TOP-LEVEL Menu Groups only - must come AFTER submenu styles */
+            .nav-menu > li > .menu-group-title,
+            #navMenu > li > .menu-group-title {
+              display: inline-block !important;
+              padding: 0.5rem 1rem !important;
+              color: var(--nav-color) !important;
+              font-weight: 500 !important;
+              line-height: 1.7 !important;
+              cursor: default !important;
+              user-select: none !important;
+              vertical-align: middle !important;
+              text-decoration: none !important;
+              margin: 0 !important;
+              transition: color 0.3s ease !important;
+            }
+            
+            .nav-menu > li > .menu-group-title:hover,
+            #navMenu > li > .menu-group-title:hover {
+              color: var(--nav-hover-color) !important;
+              background-color: transparent !important;
+            }
+            
+            /* On mobile, show nested menus as expandable accordion */
+            @media (max-width: 768px) {
+              /* Mobile submenu styling */
+              .nav-menu .sub-menu,
+              nav .sub-menu,
+              .navbar .sub-menu {
+                position: static !important;
+                transform: none !important;
+                box-shadow: none !important;
+                background: transparent !important;
+                margin-top: 0 !important;
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                visibility: hidden;
+                transition: max-height 0.3s ease, opacity 0.3s ease, visibility 0.3s ease, padding 0.3s ease;
+                padding: 0 !important;
+                border-radius: 0 !important;
+              }
+              
+              /* Expanded state */
+              .sub-menu.mobile-expanded {
+                max-height: 500px !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                padding: 8px 0 8px 16px !important;
+              }
+              
+              /* RTL padding adjustment */
+              [dir="rtl"] .sub-menu.mobile-expanded,
+              html[lang="he"] .sub-menu.mobile-expanded,
+              html[lang="ar"] .sub-menu.mobile-expanded {
+                padding: 8px 16px 8px 0 !important;
+              }
+              
+              /* Disable hover behavior on mobile */
+              .nav-menu li:hover > .sub-menu,
+              nav li:hover > .sub-menu,
+              .navbar li:hover > .sub-menu {
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+              }
+              
+              /* Enable visibility for expanded submenus */
+              .nav-menu li > .sub-menu.mobile-expanded,
+              nav li > .sub-menu.mobile-expanded,
+              .navbar li > .sub-menu.mobile-expanded {
+                opacity: 1 !important;
+                visibility: visible !important;
+                pointer-events: auto !important;
+              }
+              
+              .sub-menu a {
+                padding: 10px 0 !important;
+                display: block !important;
+                font-size: 14px !important;
+              }
+              
+              .sub-menu a:hover {
+                background-color: transparent !important;
+              }
+              
+              /* Parent item wrapper - flex layout for link + toggle */
+              .nav-menu li:has(.sub-menu),
+              nav li:has(.sub-menu),
+              .navbar li:has(.sub-menu) {
+                display: flex !important;
+                flex-wrap: wrap !important;
+                align-items: center !important;
+              }
+              
+              /* Parent link - takes most space, allows navigation */
+              .nav-menu li:has(.sub-menu) > a,
+              nav li:has(.sub-menu) > a,
+              .navbar li:has(.sub-menu) > a,
+              .nav-menu > li > .menu-group-title,
+              #navMenu > li > .menu-group-title {
+                flex: 1 !important;
+              }
+              
+              /* HIDE EXISTING CHEVRONS/ARROWS from cloned sites to prevent duplicates */
+              .nav-menu li:has(.sub-menu) > a .fa-chevron-down,
+              .nav-menu li:has(.sub-menu) > a .fa-angle-down,
+              .nav-menu li:has(.sub-menu) > a [class*="chevron"],
+              .nav-menu li:has(.sub-menu) > a [class*="arrow"],
+              nav li:has(.sub-menu) > a [class*="chevron"],
+              nav li:has(.sub-menu) > a [class*="arrow"],
+              #navMenu li:has(.sub-menu) > a [class*="chevron"],
+              #navMenu li:has(.sub-menu) > a [class*="arrow"] {
+                display: none !important;
+                visibility: hidden !important;
+              }
+              
+              /* Toggle arrow button - separate clickable area */
+              .mobile-submenu-toggle {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                width: 44px !important;
+                height: 44px !important;
+                background: transparent !important;
+                border: none !important;
+                cursor: pointer !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                flex-shrink: 0 !important;
+                -webkit-tap-highlight-color: transparent;
+              }
+              
+              .mobile-submenu-toggle::after {
+                content: '' !important;
+                display: block !important;
+                width: 0 !important;
+                height: 0 !important;
+                border-left: 6px solid transparent !important;
+                border-right: 6px solid transparent !important;
+                border-top: 7px solid currentColor !important;
+                transition: transform 0.3s ease !important;
+              }
+              
+              /* Rotate arrow when expanded */
+              .mobile-submenu-toggle.expanded::after {
+                transform: rotate(180deg) !important;
+              }
+              
+              /* Submenu takes full width below parent */
+              .nav-menu li:has(.sub-menu) > .sub-menu,
+              nav li:has(.sub-menu) > .sub-menu,
+              .navbar li:has(.sub-menu) > .sub-menu {
+                flex-basis: 100% !important;
+                width: 100% !important;
+              }
+            }
+            
+            /* Hide toggle button on desktop */
+            @media (min-width: 769px) {
+              .mobile-submenu-toggle {
+                display: none !important;
+              }
+            }
+          </style>
+          
+          <script id="zappy-mobile-menu-script">
+            // Mobile menu toggle for nested submenus (including Menu Groups)
+            // Uses separate toggle button - link navigates, arrow toggles submenu
+            (function() {
+              function initMobileMenuToggles() {
+                // Only run on mobile
+                if (window.innerWidth > 768) {
+                  // Remove any toggle buttons on desktop
+                  document.querySelectorAll('.mobile-submenu-toggle').forEach(btn => btn.remove());
+                  document.querySelectorAll('.sub-menu.mobile-expanded').forEach(menu => {
+                    menu.classList.remove('mobile-expanded');
+                  });
+                  console.log('[MOBILE MENU] Desktop mode - cleanup done');
+                  return;
+                }
+                
+                console.log('[MOBILE MENU] Initializing mobile menu toggles...');
+                
+                // Find all parent menu items (items with .sub-menu)
+                const menuItemsWithSubmenus = document.querySelectorAll(
+                  '.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)'
+                );
+                
+                console.log('[MOBILE MENU] Found', menuItemsWithSubmenus.length, 'items with submenus');
+                
+                menuItemsWithSubmenus.forEach(function(li) {
+                  // Skip if already has toggle button
+                  if (li.querySelector('.mobile-submenu-toggle')) {
+                    return;
+                  }
+                  
+                  const submenu = li.querySelector('.sub-menu');
+                  const parentLink = li.querySelector(':scope > a') || li.querySelector(':scope > .menu-group-title');
+                  
+                  if (!submenu || !parentLink) return;
+                  
+                  // Create toggle button
+                  const toggleBtn = document.createElement('button');
+                  toggleBtn.className = 'mobile-submenu-toggle';
+                  toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+                  toggleBtn.setAttribute('type', 'button');
+                  
+                  // Insert toggle button after the link
+                  parentLink.insertAdjacentElement('afterend', toggleBtn);
+                  
+                  console.log('[MOBILE MENU] Created toggle button for:', parentLink.textContent?.trim());
+                  
+                  // Handle toggle button click - only toggles submenu
+                  toggleBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const isExpanded = submenu.classList.contains('mobile-expanded');
+                    
+                    // Close all other submenus first
+                    document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+                      if (menu !== submenu) {
+                        menu.classList.remove('mobile-expanded');
+                        const otherToggle = menu.parentElement.querySelector('.mobile-submenu-toggle');
+                        if (otherToggle) otherToggle.classList.remove('expanded');
+                      }
+                    });
+                    
+                    // Toggle this submenu
+                    submenu.classList.toggle('mobile-expanded');
+                    toggleBtn.classList.toggle('expanded');
+                    
+                    console.log('[MOBILE MENU] Toggled submenu:', !isExpanded ? 'expanded' : 'collapsed');
+                  });
+                  
+                  // Parent link navigates normally - no preventDefault
+                });
+              }
+              
+              // Initialize on DOM load
+              if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initMobileMenuToggles);
+              } else {
+                initMobileMenuToggles();
+              }
+              
+              // Re-initialize on window resize (but use debounce to avoid too many calls)
+              let resizeTimer;
+              window.addEventListener('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(initMobileMenuToggles, 250);
+              });
+              
+              // Also initialize when mobile menu becomes visible
+              // This handles cases where the mobile menu is hidden initially
+              const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                  if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    const target = mutation.target;
+                    if (target.classList.contains('active') || target.style.display !== 'none') {
+                      console.log('[MOBILE MENU] Mobile menu became visible, re-initializing...');
+                      setTimeout(initMobileMenuToggles, 100);
+                    }
+                  }
+                });
+              });
+              
+              // Observe mobile menu containers
+              const mobileMenus = document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu');
+              mobileMenus.forEach(function(menu) {
+                observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+              });
+            })();
+          </script>
+        </head>
 <body>
 
 <!-- Zappy Attribution Header -->
 <div id="zappy-attribution-header" class="zappy-header" style="display: none;">
   <p>Happily created by&nbsp;<a href="https://zappy5.com" target="_blank" rel="noopener noreferrer" class="zappy-link">Zappy</a></p>
 </div>
-  <nav class="navbar" dir="rtl"><button class="mobile-toggle" id="mobileToggle" aria-label="תפריט"><svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg><svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display: none;"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></button><button class="phone-header-btn" aria-label="התקשר"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></button><div class="nav-container"><div class="nav-right-group"><div class="nav-brand"><a href="/" class="logo-link"><img src="/assets/business-logo.webp" alt="AERLUNO" class="logo"></a></div><ul class="nav-menu" id="navMenu"><li><a href="/impact">השפעה</a></li><li><a href="/destinations">יעדים</a></li></ul></div><div class="nav-cta-container"><a href="/contact" class="nav-cta-btn">צור קשר</a></div></div></nav>
+  <nav class="navbar" dir="rtl"><button class="mobile-toggle" id="mobileToggle" aria-label="תפרחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ט"><svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg><svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display: none;"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></button><button class="phone-header-btn" aria-label="התקשר"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></button><div class="nav-container"><div class="nav-right-group"><div class="nav-brand"><a href="/" class="logo-link"><img src="/assets/business-logo.webp" alt="AERLUNO" class="logo"></a></div><ul class="nav-menu" id="navMenu"><li><a href="/destinations">חיבור בין אחריות חברתית להשפעה אמיתית,במודל מדיד ,ובר־קיימא.עדחיבור בין אחריות חברתית להשפעה אמיתית,במודל מדיד ,ובר־קיימא.ם</a></li><li><a href="/impact">השפעה</a></li><li class="nav-cta-item-mobile"><a href="/contact">צור קשר</a></li></ul></div><div class="nav-cta-container"><a href="/contact" class="nav-cta-btn">צור קשר</a></div></div></nav>
 <script>
 
 // Navbar Mobile Menu Toggle and Contrast Fix
@@ -151,7 +531,7 @@
                        document.querySelector('.menu-toggle') ||
                        document.querySelector('.burger-menu') ||
                        document.querySelector('[aria-label="Menu"]') ||
-                       document.querySelector('[aria-label="תפריט"]');
+                       document.querySelector('[aria-label="תפרחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ט"]');
     
     const phoneBtn = document.querySelector('.phone-header-btn');
     
@@ -399,7 +779,7 @@
                    document.querySelector('.menu-toggle') ||
                    document.querySelector('.burger-menu') ||
                    document.querySelector('[aria-label="Menu"]') ||
-                   document.querySelector('[aria-label="תפריט"]');
+                   document.querySelector('[aria-label="תפרחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ט"]');
     
     // EXPANDED SEARCH: Find nav menu by ID or class
     const navMenu = document.getElementById('navMenu') ||
@@ -471,7 +851,7 @@
         const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
         const phoneNumber = phoneLinks.length > 0 
           ? phoneLinks[0].getAttribute('href').replace('tel:', '')
-          : '[business_phone]';
+          : '0547597599';
         
         window.location.href = 'tel:' + phoneNumber;
         console.log('[Navbar] Phone button clicked');
@@ -522,9 +902,9 @@
     <section class="impact-hero-section" data-layout-spec="Impact-hero">
   <div class="impact-hero-container">
     <div class="impact-hero-content">
-      <h1 class="impact-hero-title" style="font-size: 26px;">השפעה שאפשר למדוד.</h1>
-      <p class="impact-hero-description">אנחנו מחויבים לשקיפות מלאה, ביקורת ותוצאות מוחשיות בשטח. כל טיסה, כל מסלול וכל שיתוף פעולה נמדדים ומדווחים בזמן אמת, כך שתוכלו לראות בדיוק איך ההשקעה שלכם משנה חיים.</p>
-      <a href="/contact" class="impact-hero-cta">דברו איתנו על פיילוט השפעה</a>
+      <h1 class="impact-hero-title" style="font-size: 25px;">השפעה שאפשר למדוד.</h1>
+      <p class="impact-hero-description">אנחנו מחוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.בחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם לשקחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.פות מלאה, בחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.קורת ותוצאות מוחשחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות בשטח. כל טחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.סה, כל מסלול וכל שחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.תוף פעולה נמדדחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם ומדווחחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם בזמן אמת, כך שתוכלו לראות בדחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.וק אחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ך ההשקעה שלכם משנה חחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם.</p>
+      <a href="/contact" class="impact-hero-cta">דברו אחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.תנו על פחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.לוט השפעה</a>
     </div>
 
     <div class="impact-dashboard">
@@ -533,11 +913,11 @@
       </div>
       <div class="impact-metrics-grid">
         <div class="impact-metric-block">
-          <h3 class="metric-label" style="font-size: 18px;">טיסות שאפשרנו</h3>
+          <h3 class="metric-label" style="font-size: 18px;">טחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.סות שאפשרנו</h3>
           <div class="metric-value">2,847</div>
         </div>
         <div class="impact-metric-block">
-          <h3 class="metric-label" style="font-size: 18px;">מסלולי שותפים פעילים</h3>
+          <h3 class="metric-label" style="font-size: 18px;">מסלולחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. שותפחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם פעחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.לחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם</h3>
           <div class="metric-value">34</div>
         </div>
         <div class="impact-metric-block">
@@ -545,19 +925,19 @@
           <div class="metric-value">4.2<span class="metric-unit">שעות</span></div>
         </div>
         <div class="impact-metric-block">
-          <h3 class="metric-label" style="font-size: 18px;">אזורים שהגענו אליהם</h3>
+          <h3 class="metric-label" style="font-size: 18px;">אזורחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם שהגענו אלחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.הם</h3>
           <div class="metric-value">18</div>
         </div>
         <div class="impact-metric-block">
-          <h3 class="metric-label" style="font-size: 18px;">אמינות תפעולית</h3>
+          <h3 class="metric-label" style="font-size: 18px;">אמחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.נות תפעולחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת</h3>
           <div class="metric-value">98.3<span class="metric-unit">%</span></div>
         </div>
         <div class="impact-metric-block">
-          <h3 class="metric-label" style="font-size: 18px;">תדירות דיווח</h3>
-          <div class="metric-value">שבועי</div>
+          <h3 class="metric-label" style="font-size: 18px;">תדחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.רות דחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ווח</h3>
+          <div class="metric-value">שבועחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.</div>
         </div>
       </div>
-      <p class="impact-dashboard-footer">כל הנתונים מתעדכנים באופן שבועי ומבוקרים על ידי גורם חיצוני עצמאי. אנחנו מפרסמים דוחות השפעה מפורטים כל רבעון, כולל סיפורים אישיים של מוטבים ותובנות תפעוליות.</p>
+      <p class="impact-dashboard-footer">כל הנתונחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם מתעדכנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם באופן שבועחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. ומבוקרחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם על חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.דחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. גורם חחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.צונחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. עצמאחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.. אנחנו מפרסמחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם דוחות השפעה מפורטחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם כל רבעון, כולל סחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.פורחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם אחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם של מוטבחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם ותובנות תפעולחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות.</p>
     </div>
   </div>
 
@@ -567,9 +947,9 @@
 <section class="impact-mission-section" data-layout-spec="Impact-mission">
   <div class="mission-container">
     <div class="mission-narrative">
-      <h2 style="font-size: 28px;">מימד חברתי מובנה במודל</h2>
-      <p>AERLUNO מאמינה שתעופה ותיירות יכולות להיות כלי לשינוי חברתי אמיתי. אנחנו לא רק מחפשים טיסות זולות – אנחנו בונים מערכת שבה כל הזמנה תורמת לקהילות, לסביבה ולערכים שחשובים לנו. השותפויות שלנו נבחרות בקפידה על בסיס עקרונות ברורים: כבוד האדם, מהירות תגובה, בטיחות מוחלטת ואחריות מלאה.</p>
-      <p>אנחנו מתחייבים שכל צעד בתהליך – מרגע החיפוש ועד הנחיתה – ישקף את הערכים האלה. זו לא רק פלטפורמה טכנולוגית, זו תנועה שמאמינה שנסיעה יכולה להיות מעשה של תרומה, לא רק צריכה.</p>
+      <h2 style="font-size: 28px;">מחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.מד חברתחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. מובנה במודל</h2>
+      <p>AERLUNO מאמחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.נה שתעופה ותחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.רות חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.כולות להחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות כלחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. לשחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.נוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. חברתחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. אמחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.תחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.. אנחנו לא רק מחפשחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם טחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.סות זולות – אנחנו בונחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם מערכת שבה כל הזמנה תורמת לקהחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.לות, לסבחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.בה ולערכחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם שחשובחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם לנו. השותפוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות שלנו נבחרות בקפחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.דה על בסחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ס עקרונות ברורחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם: כבוד האדם, מהחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.רות תגובה, בטחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חות מוחלטת ואחרחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות מלאה.</p>
+      <p>אנחנו מתחחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.בחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם שכל צעד בתהלחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ך – מרגע החחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.פוש ועד הנחחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.תה – חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שקף את הערכחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם האלה. זו לא רק פלטפורמה טכנולוגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת, זו תנועה שמאמחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.נה שנסחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.עה חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.כולה להחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות מעשה של תרומה, לא רק צרחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.כה.</p>
     </div>
     <div class="mission-visualization">
       <div class="radar-container">
@@ -603,19 +983,19 @@
       <div class="mission-nodes">
         <div class="node-item">
           <h3 style="font-size: 18px;">כבוד האדם</h3>
-          <p>כל שותף עובד איתנו מתחייב לתנאי עבודה הוגנים, שכר ראוי ויחס מכבד לכל עובד ולקוח.</p>
+          <p>כל שותף עובד אחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.תנו מתחחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ב לתנאחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. עבודה הוגנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם, שכר ראוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. וחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חס מכבד לכל עובד ולקוח.</p>
         </div>
         <div class="node-item">
-          <h3 style="font-size: 18px;">מהירות</h3>
-          <p>אנחנו מבטיחים תגובה מהירה לכל בעיה, שינוי או בקשה – כי הזמן שלכם חשוב לנו.</p>
+          <h3 style="font-size: 18px;">מהחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.רות</h3>
+          <p>אנחנו מבטחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם תגובה מהחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.רה לכל בעחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ה, שחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.נוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. או בקשה – כחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. הזמן שלכם חשוב לנו.</p>
         </div>
         <div class="node-item">
-          <h3 style="font-size: 18px;">בטיחות</h3>
-          <p>אפס פשרות בנושא בטיחות: כל טיסה, כל שותף וכל תהליך עוברים בדיקות קפדניות.</p>
+          <h3 style="font-size: 18px;">בטחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חות</h3>
+          <p>אפס פשרות בנושא בטחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חות: כל טחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.סה, כל שותף וכל תהלחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ך עוברחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם בדחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.קות קפדנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות.</p>
         </div>
         <div class="node-item">
-          <h3 style="font-size: 18px;">אחריות</h3>
-          <p>אנחנו לוקחים אחריות מלאה על כל התחייבות – מהרגע שהזמנתם ועד לרגע שחזרתם הביתה.</p>
+          <h3 style="font-size: 18px;">אחרחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות</h3>
+          <p>אנחנו לוקחחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם אחרחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות מלאה על כל התחחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.בות – מהרגע שהזמנתם ועד לרגע שחזרתם הבחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.תה.</p>
         </div>
       </div>
     </div>
@@ -625,7 +1005,7 @@
 <section class="impact-timeline-section" data-layout-spec="Impact-timeline">
   <div class="timeline-container">
     <div class="timeline-header">
-      <h2 style="font-size: 28px;">מהשיחה הראשונה ועד הדו״ח הראשון</h2>
+      <h2 style="font-size: 28px;">מהשחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חה הראשונה ועד הדו״ח הראשון</h2>
     </div>
 
     <div class="timeline-content">
@@ -651,11 +1031,11 @@
       <div class="timeline-steps">
         <article class="timeline-step">
           <div class="step-content">
-            <h3 style="font-size: 18px;">גילוי והכרות</h3>
-            <p>שיחה ראשונית להבנת הצרכים הארגוניים, מטרות התרומה החברתית והיכולות הלוגיסטיות הקיימות. מיפוי ראשוני של נתיבים פוטנציאליים ודרישות תפעוליות.</p>
+            <h3 style="font-size: 18px;">גחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.לוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. והכרות</h3>
+            <p>שחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חה ראשונחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת להבנת הצרכחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם הארגונחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם, מטרות התרומה החברתחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת והחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.כולות הלוגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.סטחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות הקחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.מות. מחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.פוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. ראשונחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. של נתחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.בחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם פוטנצחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.אלחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם ודרחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שות תפעולחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות.</p>
             <div class="step-duration">
               <i class="fas fa-clock" aria-hidden="true"></i>
-              <span class="duration-label">משך זמן טיפוסי:</span>
+              <span class="duration-label">משך זמן טחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.פוסחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.:</span>
               <span class="duration-value">1–2 שבועות</span>
             </div>
           </div>
@@ -663,11 +1043,11 @@
 
         <article class="timeline-step">
           <div class="step-content">
-            <h3 style="font-size: 18px;">מיפוי קיבולת</h3>
-            <p>ניתוח מעמיק של קיבולת פנויה בטיסות, זמינות מושבים לא מנוצלים ותיאום עם לוחות הזמנים התפעוליים. בניית מודל נתונים מדויק למקסום ההשפעה החברתית ללא פגיעה ברווחיות.</p>
+            <h3 style="font-size: 18px;">מחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.פוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. קחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.בולת</h3>
+            <p>נחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.תוח מעמחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ק של קחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.בולת פנוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ה בטחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.סות, זמחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.נות מושבחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם לא מנוצלחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם ותחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.אום עם לוחות הזמנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם התפעולחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם. בנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת מודל נתונחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם מדוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ק למקסום ההשפעה החברתחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת ללא פגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.עה ברווחחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות.</p>
             <div class="step-duration">
               <i class="fas fa-clock" aria-hidden="true"></i>
-              <span class="duration-label">משך זמן טיפוסי:</span>
+              <span class="duration-label">משך זמן טחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.פוסחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.:</span>
               <span class="duration-value">2–4 שבועות</span>
             </div>
           </div>
@@ -675,11 +1055,11 @@
 
         <article class="timeline-step">
           <div class="step-content">
-            <h3 style="font-size: 18px;">עיצוב פיילוט</h3>
-            <p>הגדרת תכנית פיילוט ממוקדת עם יעדים ברורים, מדדי הצלחה וזמני ביצוע. תיאום בין כל הגורמים המעורבים ובניית תשתית טכנולוגית לניהול ומעקב.</p>
+            <h3 style="font-size: 18px;">עחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.צוב פחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.לוט</h3>
+            <p>הגדרת תכנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת פחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.לוט ממוקדת עם חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.עדחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם ברורחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם, מדדחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. הצלחה וזמנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. בחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.צוע. תחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.אום בחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ן כל הגורמחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם המעורבחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם ובנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת תשתחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת טכנולוגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת לנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.הול ומעקב.</p>
             <div class="step-duration">
               <i class="fas fa-clock" aria-hidden="true"></i>
-              <span class="duration-label">משך זמן טיפוסי:</span>
+              <span class="duration-label">משך זמן טחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.פוסחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.:</span>
               <span class="duration-value">1–2 שבועות</span>
             </div>
           </div>
@@ -687,11 +1067,11 @@
 
         <article class="timeline-step">
           <div class="step-content">
-            <h3 style="font-size: 18px;">ביצוע ותפעול</h3>
-            <p>הפעלת התכנית החברתית בפועל, ניהול הזמנות ותיאום נוסעים, מעקב שוטף אחר ביצועים ותיקון תהליכים בזמן אמת. שיתוף פעולה רציף עם כל השותפים להבטחת חוויה חלקה.</p>
+            <h3 style="font-size: 18px;">בחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.צוע ותפעול</h3>
+            <p>הפעלת התכנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת החברתחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת בפועל, נחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.הול הזמנות ותחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.אום נוסעחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם, מעקב שוטף אחר בחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.צועחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם ותחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.קון תהלחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.כחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם בזמן אמת. שחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.תוף פעולה רצחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ף עם כל השותפחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם להבטחת חווחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ה חלקה.</p>
             <div class="step-duration">
               <i class="fas fa-clock" aria-hidden="true"></i>
-              <span class="duration-label">משך זמן טיפוסי:</span>
+              <span class="duration-label">משך זמן טחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.פוסחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.:</span>
               <span class="duration-value">מתמשך</span>
             </div>
           </div>
@@ -699,12 +1079,12 @@
 
         <article class="timeline-step">
           <div class="step-content">
-            <h3 style="font-size: 18px;">דיווח והערכה</h3>
-            <p>הפקת דוחות מפורטים על ההשפעה החברתית, ניצול הקיבולת והתועלת הכלכלית. ניתוח נתונים לשיפור מתמיד והצגת תובנות אסטרטגיות להרחבת התכנית.</p>
+            <h3 style="font-size: 18px;">דחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ווח והערכה</h3>
+            <p>הפקת דוחות מפורטחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם על ההשפעה החברתחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת, נחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.צול הקחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.בולת והתועלת הכלכלחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת. נחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.תוח נתונחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם לשחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.פור מתמחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ד והצגת תובנות אסטרטגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות להרחבת התכנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת.</p>
             <div class="step-duration">
               <i class="fas fa-clock" aria-hidden="true"></i>
-              <span class="duration-label">משך זמן טיפוסי:</span>
-              <span class="duration-value">חודשי</span>
+              <span class="duration-label">משך זמן טחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.פוסחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.:</span>
+              <span class="duration-value">חודשחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.</span>
             </div>
           </div>
         </article>
@@ -713,26 +1093,26 @@
       <aside class="data-artifacts">
         <div class="artifacts-header">
           <i class="fas fa-file-alt" aria-hidden="true"></i>
-          <h3 style="font-size: 18px;">תוצרי נתונים</h3>
+          <h3 style="font-size: 18px;">תוצרחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. נתונחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם</h3>
         </div>
         <div class="artifacts-list">
           <div class="artifact-item">
             <div class="artifact-icon">
               <i class="fas fa-handshake" aria-hidden="true"></i>
             </div>
-            <p><strong>תדריך שותף:</strong> מסמך מפורט המגדיר את מטרות השיתוף, היקפי הפעילות והמחויבויות ההדדיות.</p>
+            <p><strong>תדרחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ך שותף:</strong> מסמך מפורט המגדחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ר את מטרות השחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.תוף, החיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.קפחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. הפעחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.לות והמחוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.בוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות ההדדחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות.</p>
           </div>
           <div class="artifact-item">
             <div class="artifact-icon">
               <i class="fas fa-clipboard-list" aria-hidden="true"></i>
             </div>
-            <p><strong>תכנית פיילוט:</strong> מפת דרכים מפורטת לשלב הניסוי, כולל לוחות זמנים, משאבים ונקודות בקרה.</p>
+            <p><strong>תכנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת פחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.לוט:</strong> מפת דרכחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם מפורטת לשלב הנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.סוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא., כולל לוחות זמנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם, משאבחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם ונקודות בקרה.</p>
           </div>
           <div class="artifact-item">
             <div class="artifact-icon">
               <i class="fas fa-chart-line" aria-hidden="true"></i>
             </div>
-            <p><strong>דוח השפעה:</strong> ניתוח כמותי ואיכותני של התוצאות החברתיות, הכלכליות והתפעוליות שהושגו.</p>
+            <p><strong>דוח השפעה:</strong> נחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.תוח כמותחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. ואחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.כותנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. של התוצאות החברתחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות, הכלכלחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות והתפעולחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות שהושגו.</p>
           </div>
         </div>
       </aside>
@@ -743,8 +1123,8 @@
 <section class="impact-team-section" data-layout-spec="Impact-team">
   <div class="impact-team-container">
     <div class="impact-team-header">
-      <h2 class="impact-team-title" style="font-size: 28px;">נבנה על ידי אנשי מקצוע, מונחה על ידי מטרה</h2>
-      <p class="impact-team-intro">צוות AERLUNO משלב ניסיון מעשי בתעופה, לוגיסטיקה ותיירות עם מחויבות עמוקה לאחריות חברתית. אנחנו לא רק מפעילים פלטפורמה – אנחנו בונים גשר בין נוסעים למטרות משמעותיות, תוך שמירה על שקיפות מלאה ומקצועיות ללא פשרות.</p>
+      <h2 class="impact-team-title" style="font-size: 28px;">נבנה על חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.דחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. אנשחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. מקצוע, מונחה על חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.דחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. מטרה</h2>
+      <p class="impact-team-intro">צוות AERLUNO משלב נחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.סחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ון מעשחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. בתעופה, לוגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.סטחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.קה ותחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.רות עם מחוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.בות עמוקה לאחרחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות חברתחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת. אנחנו לא רק מפעחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.לחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם פלטפורמה – אנחנו בונחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם גשר בחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ן נוסעחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם למטרות משמעותחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות, תוך שמחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.רה על שקחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.פות מלאה ומקצועחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות ללא פשרות.</p>
     </div>
 
     <div class="impact-team-grid">
@@ -755,53 +1135,53 @@
         </div>
         <div class="impact-team-info">
           <h3 class="impact-team-name" style="font-size: 18px;">נועה כהן</h3>
-          <p class="impact-team-role">תפעול ואסטרטגיה</p>
-          <p class="impact-team-bio">15 שנות ניסיון בניהול תפעול תעופתי ואופטימיזציה לוגיסטית. מובילה את מערך הקיבולת והזמינות של AERLUNO תוך שמירה על סטנדרטים הגבוהים ביותר.</p>
+          <p class="impact-team-role">תפעול ואסטרטגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ה</p>
+          <p class="impact-team-bio">15 שנות נחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.סחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ון בנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.הול תפעול תעופתחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. ואופטחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.מחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.זצחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ה לוגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.סטחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת. מובחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.לה את מערך הקחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.בולת והזמחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.נות של AERLUNO תוך שמחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.רה על סטנדרטחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם הגבוהחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם בחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ותר.</p>
         </div>
       </div>
 
       <div class="impact-team-member">
         <div class="impact-team-image-wrapper">
-          <img data-placeholder="impact-team-image-2" data-context="Professional headshot of partnerships director in their 40s, approachable smile, modern corporate environment, business casual attire, natural daylight, high-quality executive portrait for aviation social impact company" width="600" height="600" src="/assets/site-impact-image-2.webp" alt="מנהל שותפויות אסטרטגיות">
+          <img data-placeholder="impact-team-image-2" data-context="Professional headshot of partnerships director in their 40s, approachable smile, modern corporate environment, business casual attire, natural daylight, high-quality executive portrait for aviation social impact company" width="600" height="600" src="/assets/site-impact-image-2.webp" alt="מנהל שותפוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות אסטרטגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות">
           <div class="impact-team-image-overlay"></div>
         </div>
         <div class="impact-team-info">
-          <h3 class="impact-team-name" style="font-size: 18px;">יונתן לוי</h3>
-          <p class="impact-team-role">שותפויות ופיתוח עסקי</p>
-          <p class="impact-team-bio">מומחה בבניית שותפויות אסטרטגיות בתחום התעופה והתיירות. אחראי על רשת הקשרים עם חברות תעופה וארגוני החברה האזרחית.</p>
+          <h3 class="impact-team-name" style="font-size: 18px;">חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ונתן לוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.</h3>
+          <p class="impact-team-role">שותפוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות ופחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.תוח עסקחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.</p>
+          <p class="impact-team-bio">מומחה בבנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת שותפוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות אסטרטגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות בתחום התעופה והתחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.רות. אחראחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. על רשת הקשרחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם עם חברות תעופה וארגונחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. החברה האזרחחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת.</p>
         </div>
       </div>
 
       <div class="impact-team-member">
         <div class="impact-team-image-wrapper">
-          <img data-placeholder="impact-team-image-3" data-context="Professional headshot of data analytics expert in their 30s, focused expression, tech-forward office setting, smart casual attire, cool LED lighting, high-quality portrait for aviation technology social enterprise" width="600" height="600" src="/assets/site-impact-image-3.webp" alt="מומחית אנליטיקה ונתונים">
+          <img data-placeholder="impact-team-image-3" data-context="Professional headshot of data analytics expert in their 30s, focused expression, tech-forward office setting, smart casual attire, cool LED lighting, high-quality portrait for aviation technology social enterprise" width="600" height="600" src="/assets/site-impact-image-3.webp" alt="מומחחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת אנלחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.טחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.קה ונתונחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם">
           <div class="impact-team-image-overlay"></div>
         </div>
         <div class="impact-team-info">
-          <h3 class="impact-team-name" style="font-size: 18px;">מיכל רוזנברג</h3>
-          <p class="impact-team-role">אנליטיקה ומדידת השפעה</p>
-          <p class="impact-team-bio">מובילה את מערך הנתונים והמדידה של AERLUNO. מתמחה בהפיכת נתונים מורכבים לתובנות פעולה ברורות למען שקיפות מלאה.</p>
+          <h3 class="impact-team-name" style="font-size: 18px;">מחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.כל רוזנברג</h3>
+          <p class="impact-team-role">אנלחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.טחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.קה ומדחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.דת השפעה</p>
+          <p class="impact-team-bio">מובחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.לה את מערך הנתונחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם והמדחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.דה של AERLUNO. מתמחה בהפחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.כת נתונחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם מורכבחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם לתובנות פעולה ברורות למען שקחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.פות מלאה.</p>
         </div>
       </div>
 
       <div class="impact-team-member">
         <div class="impact-team-image-wrapper">
-          <img data-placeholder="impact-team-image-4" data-context="Professional headshot of impact reporting specialist in their 30s, warm genuine smile, bright contemporary office, professional attire with social enterprise vibe, natural lighting, high-quality portrait for aviation social impact organization" width="600" height="600" src="/assets/site-impact-image-4.webp" alt="מנהל דיווח השפעה חברתית">
+          <img data-placeholder="impact-team-image-4" data-context="Professional headshot of impact reporting specialist in their 30s, warm genuine smile, bright contemporary office, professional attire with social enterprise vibe, natural lighting, high-quality portrait for aviation social impact organization" width="600" height="600" src="/assets/site-impact-image-4.webp" alt="מנהל דחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ווח השפעה חברתחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת">
           <div class="impact-team-image-overlay"></div>
         </div>
         <div class="impact-team-info">
-          <h3 class="impact-team-name" style="font-size: 18px;">אלון שפירא</h3>
-          <p class="impact-team-role">דיווח השפעה ושקיפות</p>
-          <p class="impact-team-bio">אחראי על מערך הדיווח החברתי והסביבתי. מוודא שכל תרומה מתועדת ומדווחת באופן שקוף ומקצועי לנוסעים ולארגונים.</p>
+          <h3 class="impact-team-name" style="font-size: 18px;">אלון שפחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.רא</h3>
+          <p class="impact-team-role">דחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ווח השפעה ושקחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.פות</p>
+          <p class="impact-team-bio">אחראחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. על מערך הדחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ווח החברתחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. והסבחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.בתחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.. מוודא שכל תרומה מתועדת ומדווחת באופן שקוף ומקצועחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. לנוסעחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם ולארגונחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם.</p>
         </div>
       </div>
     </div>
 
     <div class="impact-team-advisory">
-      <h3 class="impact-team-advisory-title" style="font-size: 18px;">מועצה מייעצת</h3>
+      <h3 class="impact-team-advisory-title" style="font-size: 18px;">מועצה מחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.עצת</h3>
       <div class="impact-team-advisory-content">
-        <p class="impact-team-advisory-text">מועצת היועצים של AERLUNO כוללת מומחים בכירים בתעופה אזרחית, ניהול תפעול תעופתי בינלאומי, וציות רגולטורי. חברי המועצה מביאים ניסיון של עשרות שנים בחברות תעופה מובילות, רשויות תעופה אזרחית וארגונים רב-לאומיים, ומספקים הכוונה אסטרטגית בנושאי בטיחות, יעילות תפעולית ותקינה.</p>
-        <p class="impact-team-advisory-text">בנוסף, המועצה כוללת מומחים בתחום התיאום ההומניטרי הבינלאומי ולוגיסטיקה של סיוע בשעת חירום. הם מסייעים לנו להבין את הצרכים הייחודיים של ארגוני סיוע, לזהות הזדמנויות לתרומה משמעותית, ולוודא שהמודל העסקי שלנו משרת באמת את המטרות החברתיות שאנו שואפים להשיג.</p>
+        <p class="impact-team-advisory-text">מועצת החיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ועצחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם של AERLUNO כוללת מומחחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם בכחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.רחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם בתעופה אזרחחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת, נחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.הול תפעול תעופתחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. בחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.נלאומחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא., וצחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות רגולטורחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.. חברחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. המועצה מבחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.אחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם נחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.סחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ון של עשרות שנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם בחברות תעופה מובחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.לות, רשוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות תעופה אזרחחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת וארגונחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם רב-לאומחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם, ומספקחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם הכוונה אסטרטגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת בנושאחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. בטחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חות, חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.עחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.לות תפעולחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת ותקחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.נה.</p>
+        <p class="impact-team-advisory-text">בנוסף, המועצה כוללת מומחחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם בתחום התחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.אום ההומנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.טרחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. הבחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.נלאומחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. ולוגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.סטחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.קה של סחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.וע בשעת חחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.רום. הם מסחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.עחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם לנו להבחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ן את הצרכחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם החיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חודחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם של ארגונחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. סחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.וע, לזהות הזדמנוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות לתרומה משמעותחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת, ולוודא שהמודל העסקחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. שלנו משרת באמת את המטרות החברתחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות שאנו שואפחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם להשחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ג.</p>
       </div>
     </div>
   </div>
@@ -811,8 +1191,8 @@
   <div class="cta-container">
     <div class="cta-content">
       <div class="cta-text">
-        <h2 style="font-size: 28px;">בואו נתאם קיבולת עם תוצאות.</h2>
-        <p>אנחנו מזמינים שותפים ותומכים לפתוח שיחה ולבנות ביחד מערכת תעופה שמשרתת את הקהילה.</p>
+        <h2 style="font-size: 28px;">בואו נתאם קחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.בולת עם תוצאות.</h2>
+        <p>אנחנו מזמחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.נחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם שותפחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם ותומכחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם לפתוח שחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חה ולבנות בחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חד מערכת תעופה שמשרתת את הקהחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.לה.</p>
       </div>
       <div class="cta-action">
         <a href="/contact" class="btn-primary">צור קשר</a>
@@ -830,14 +1210,14 @@
     <div class="footer-grid">
       <div class="footer-column footer-about">
         <img src="/assets/business-logo.webp" alt="AERLUNO" class="logo">
-        <p class="footer-tagline">תעופה ותיירות עם מימד חברתי - מחברים בין עולמות ומשנים חיים</p>
+        <p class="footer-tagline">תעופה ותחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.רות עם מחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.מד חברתחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא. - מחברחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם בחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ן עולמות ומשנחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם חחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם</p>
       </div>
       
       <div class="footer-column footer-links">
-        <h3 class="footer-title" style="font-size: 18px;">קישורים מהירים</h3>
+        <h3 class="footer-title" style="font-size: 18px;">קחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שורחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם מהחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.רחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם</h3>
         <ul class="footer-menu">
-          <li><a href="/impact">השפעה חברתית</a></li>
-          <li><a href="/destinations">יעדים</a></li>
+          <li><a href="/impact">השפעה חברתחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ת</a></li>
+          <li><a href="/destinations">חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.עדחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם</a></li>
           <li><a href="/contact">צור קשר</a></li>
         </ul>
       </div>
@@ -847,19 +1227,19 @@
         <ul class="contact-list">
           <li>
             <i class="fas fa-envelope"></i>
-            <a href="mailto:[business_email]">[business_email]</a>
+            <a href="mailto:info@company.com">info@company.com</a>
           </li>
           <li>
             <i class="fas fa-phone"></i>
-            <a href="tel:[business_phone]">[business_phone]</a>
+            <a href="tel:0547597599">0547597599</a>
           </li>
           <li><a href="/impact"><i class="fas fa-map-marker-alt"></i>
-            <span>[business_address]</span></a></li>
+            <span>TEL AVIV, חיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שראל</span></a></li>
         </ul>
       </div>
       
       <div class="footer-column footer-social">
-        <h3 class="footer-title" style="font-size: 18px;">עקבו אחרינו</h3>
+        <h3 class="footer-title" style="font-size: 18px;">עקבו אחרחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.נו</h3>
         <div class="social-links">
           <a href="[facebook_handle]" aria-label="Facebook" target="_blank" rel="noopener">
             <i class="fab fa-facebook-f"></i>
@@ -867,7 +1247,7 @@
           <a href="[instagram_handle]" aria-label="Instagram" target="_blank" rel="noopener">
             <i class="fab fa-instagram"></i>
           </a>
-          <a href="[whatsapp_handle]" aria-label="WhatsApp" target="_blank" rel="noopener">
+          <a href="https://wa.me/972547597599" aria-label="WhatsApp" target="_blank" rel="noopener">
             <i class="fab fa-whatsapp"></i>
           </a>
         </div>
@@ -876,14 +1256,14 @@
     
     <div class="footer-bottom">
       <div class="footer-legal">
-        <a href="/privacy">מדיניות פרטיות</a>
+        <a href="/privacy">מדחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.נחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות פרטחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות</a>
         <span class="separator">|</span>
-        <a href="/terms">תנאים והגבלות</a>
+        <a href="/terms">תנאחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ם והגבלות</a>
         <span class="separator">|</span>
-        <a href="/accessibility">הצהרת נגישות</a>
+        <a href="/accessibility">הצהרת נגחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.שות</a>
       </div>
       <div class="footer-copyright">
-        <p>© 2026 AERLUNO. כל הזכויות שמורות.</p>
+        <p>© 2026 AERLUNO. כל הזכוחיבור בין אחריות חברתית להשפעה אמיתית,<br>במודל מדיד ,<br>ובר־קיימא.ות שמורות.</p>
       </div>
       <div class="footer-attribution">
         <a href="https://zappy5.com" target="_blank" class="zappy-attribution" rel="noopener">Generated by Zappy</a>
@@ -892,7 +1272,7 @@
   </div>
 </footer>
   
-  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp">
+  <a href="https://wa.me/972547597599" class="whatsapp-float" aria-label="WhatsApp">
     <i class="fab fa-whatsapp"></i>
   </a>
   
